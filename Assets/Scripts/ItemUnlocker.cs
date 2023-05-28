@@ -46,9 +46,14 @@ public class ItemUnlocker : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.F))
             {
-                if(item.gameObject.tag != "Pincers") Unlock();
-
-                CutOff();
+                if (item.gameObject.tag != "Pincers")
+                {
+                    Unlock();
+                }
+                else
+                {
+                    CutOff();
+                }
             }
         }
     }

@@ -1,13 +1,13 @@
-
 using UnityEngine;
-
 
 public class PickAndDropController : MonoBehaviour
 {
     public GameObject item;
     public Transform itemParent;
-
     public bool isPickedUp = false;
+    public float raycastRange = 3f; // Maximum distance for raycast
+
+    private static GameObject currentItem; // Track the currently picked up item
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class PickAndDropController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q) && isPickedUp == true)
+        if (Input.GetKey(KeyCode.Q) && isPickedUp)
         {
             Drop();
         }
@@ -26,36 +26,61 @@ public class PickAndDropController : MonoBehaviour
     {
         isPickedUp = false;
 
-        itemParent.DetachChildren();
-        item.transform.eulerAngles = new Vector3(item.transform.position.x, item.transform.position.z, item.transform.position.y);
-        item.GetComponent<Rigidbody>().isKinematic = false;
-        item.GetComponent<MeshCollider>().enabled = true;
+        currentItem.transform.parent = null;
+        currentItem.transform.localScale = Vector3.one; // Reset local scale to (1, 1, 1)
+        currentItem.transform.eulerAngles = new Vector3(currentItem.transform.position.x, currentItem.transform.position.z, currentItem.transform.position.y);
+        currentItem.GetComponent<Rigidbody>().isKinematic = false;
+        currentItem.GetComponent<MeshCollider>().enabled = true;
 
+        currentItem = null; // Reset the currently picked up item reference
     }
 
     void Equip()
     {
-        isPickedUp = true;
+        if (!isPickedUp && currentItem == null)
+        {
+            isPickedUp = true;
 
-        item.GetComponent<Rigidbody>().isKinematic = true;
+            item.GetComponent<Rigidbody>().isKinematic = true;
 
-        item.transform.position = itemParent.transform.position;
-        item.transform.rotation = itemParent.transform.rotation;
+            item.transform.position = itemParent.transform.position;
+            item.transform.rotation = itemParent.transform.rotation;
 
-        item.GetComponent<MeshCollider>().enabled = false;
+            item.GetComponent<MeshCollider>().enabled = false;
 
-        item.transform.SetParent(itemParent);
+            item.transform.parent = itemParent;
 
+            currentItem = item; // Set the currently picked up item reference
+        }
     }
 
-    private void OnTriggerStay(Collider other)
+    void TryPickUp()
     {
-        if(other.gameObject.tag == "Player")
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, raycastRange))
         {
-            if (Input.GetKey(KeyCode.E))
+            PickAndDropController otherPickUpController = hit.collider.GetComponent<PickAndDropController>();
+
+            if (otherPickUpController != null && otherPickUpController != this && otherPickUpController.isPickedUp)
+            {
+                // If another item is already picked up, return without picking up this item
+                return;
+            }
+
+            if (hit.collider.gameObject == item)
             {
                 Equip();
             }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (!isPickedUp && Input.GetKey(KeyCode.E))
+        {
+            TryPickUp();
         }
     }
 }
