@@ -10568,6 +10568,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6067971452477291168, guid: 5b23832c5d18bb74db49654a0d7e911c, type: 3}
   m_PrefabInstance: {fileID: 1029588685}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1033045872 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20437472682476688, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
+  m_PrefabInstance: {fileID: 2026264122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1055581593
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17125,6 +17130,8 @@ MonoBehaviour:
   chaseRadius: 15
   movementSpeed: 3
   chaseSpeedMultiplier: 1.5
+  cameraRotationSpeed: 3
+  cameraToRotate: {fileID: 1033045872}
 --- !u!195 &1644211333
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -26773,7 +26780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4207293392497186, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.1
+      value: -4.2
       objectReference: {fileID: 0}
     - target: {fileID: 4207293392497186, guid: 11aaea5348574644a9eb4f4504fcce3f, type: 3}
       propertyPath: m_LocalPosition.z

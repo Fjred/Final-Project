@@ -36,8 +36,9 @@ public class ItemUnlocker : MonoBehaviour
 
         buttonColor.color = Color.green;
 
-        visibleObject.active = false;
-        hiddenObject.active = true;
+        visibleObject.SetActive(false);
+        hiddenObject.SetActive(true);
+
     }
 
     private void OnTriggerStay(Collider other)
