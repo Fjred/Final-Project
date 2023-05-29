@@ -41,4 +41,12 @@ public class FirstPersonMovement : MonoBehaviour
         // Apply movement.
         rigidbody.velocity = transform.rotation * new Vector3(targetVelocity.x, rigidbody.velocity.y, targetVelocity.y);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            speed = 0;
+        }
+    }
 }
