@@ -24,6 +24,11 @@ public class PickAndDropController : MonoBehaviour
 
     void Drop()
     {
+        if (item.CompareTag("Gun") == true)
+        {
+            item.GetComponent<Gun>().enabled = false;
+        }
+
         isPickedUp = false;
 
         currentItem.transform.parent = null;
@@ -39,6 +44,11 @@ public class PickAndDropController : MonoBehaviour
     {
         if (!isPickedUp && currentItem == null)
         {
+            if(item.CompareTag("Gun") == true)
+            {
+                item.GetComponent<Gun>().enabled = true;
+            }
+
             isPickedUp = true;
 
             item.GetComponent<Rigidbody>().isKinematic = true;
