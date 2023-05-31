@@ -9,6 +9,10 @@ public class PickAndDropController : MonoBehaviour
 
     private static GameObject currentItem; // Track the currently picked up item
 
+    public float rotationX;
+    public float rotationY;
+    public float rotationZ;
+
     void Start()
     {
         item.GetComponent<Rigidbody>().isKinematic = true;
@@ -50,15 +54,15 @@ public class PickAndDropController : MonoBehaviour
             }
 
             isPickedUp = true;
-
+             
             item.GetComponent<Rigidbody>().isKinematic = true;
 
             item.transform.position = itemParent.transform.position;
-            item.transform.rotation = itemParent.transform.rotation;
 
             item.GetComponent<MeshCollider>().enabled = false;
 
             item.transform.parent = itemParent;
+            item.transform.localEulerAngles = new Vector3(rotationX, rotationY, rotationZ);
 
             currentItem = item; // Set the currently picked up item reference
         }
