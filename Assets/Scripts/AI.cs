@@ -19,6 +19,8 @@ public class AI : MonoBehaviour
     private float originalSpeed;
     private bool isCameraRotating = false;
 
+    public Gun gun;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -78,6 +80,8 @@ public class AI : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && !isCameraRotating)
         {
+            gun.ammo = 0;
+
             isCameraRotating = true;
             StartCoroutine(RotateCameraTowardsEnemy());
         }
