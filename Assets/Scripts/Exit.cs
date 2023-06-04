@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Exit : MonoBehaviour
 {
     public ItemUnlocker padlock;
@@ -15,13 +13,11 @@ public class Exit : MonoBehaviour
     public bool obstaclesRemoved = false;
     public bool chickenEaten = false;
     public bool dollShot = false;
-    
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    [SerializeField] private Animator exit = null;
+
+    public bool animationDone = false;
+
     void Update()
     {
         GameEndCheck();
@@ -30,7 +26,7 @@ public class Exit : MonoBehaviour
 
     public void GameEndCheck()
     {
-        if (padlock.unlocked || plank.unlocked || cables.unlocked)
+        if (padlock.unlocked && plank.unlocked && cables.unlocked)
         {
             obstaclesRemoved = true;
         }
@@ -43,5 +39,24 @@ public class Exit : MonoBehaviour
         {
             dollShot = true;
         }
+    }
+
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (obstaclesRemoved && chickenEaten && dollShot && animationDone == false)
+            {
+                exit.Play("ExitDoor", 0, 0.0f);
+
+                animationDone = true;
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        SceneManager.LoadScene(3);
     }
 }
