@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
 
     public bool destroyOnDeath;
 
-
+    public bool isDoll = false;
 
     public void Damage(int amount)
     {
@@ -25,7 +25,10 @@ public class Health : MonoBehaviour
 
             gameObject.SetActive(false);
 
-            Invoke("Activate", 3f);
+            if (!isDoll)
+            {
+                Invoke("Activate", 15f);
+            }
         }
     }
 
