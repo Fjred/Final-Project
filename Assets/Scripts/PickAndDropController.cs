@@ -36,7 +36,7 @@ public class PickAndDropController : MonoBehaviour
         isPickedUp = false;
 
         currentItem.transform.parent = null;
-        currentItem.transform.localScale = Vector3.one; // Reset local scale to (1, 1, 1)
+        currentItem.transform.localScale = Vector3.one;
         currentItem.transform.eulerAngles = new Vector3(currentItem.transform.position.x, currentItem.transform.position.z, currentItem.transform.position.y);
         currentItem.GetComponent<Rigidbody>().isKinematic = false;
         currentItem.GetComponent<MeshCollider>().enabled = true;

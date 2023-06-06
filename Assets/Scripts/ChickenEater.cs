@@ -1,10 +1,14 @@
 
 using UnityEngine;
-
+using TMPro;
 public class ChickenEater : MonoBehaviour
 {
-    public float raycastRange = 3f; // Maximum distance for raycast
+    public float raycastRange = 3f;
     public float chickenCounter = 2f;
+
+    public TMP_Text chicken;
+
+    public Exit chickenEated;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -24,6 +28,7 @@ public class ChickenEater : MonoBehaviour
                 Destroy(hit.collider.gameObject);
 
                 chickenCounter -= 1;
+                chickenEated.chickenEatenNumber += 1;
             }
 
         }

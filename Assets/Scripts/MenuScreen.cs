@@ -16,11 +16,12 @@ public class MenuScreen : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         playButton.onClick.AddListener(Play);
         exitButton.onClick.AddListener(Exit);
         infoButton.onClick.AddListener(Info);
         backButton.onClick.AddListener(Back);
-
     }
 
     public void Play()

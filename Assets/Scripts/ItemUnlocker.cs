@@ -22,7 +22,6 @@ public class ItemUnlocker : MonoBehaviour
     void Unlock()
     {
         if (item.isPickedUp != true) return;
-
         obstacle.GetComponent<Rigidbody>().isKinematic = false;
 
         unlocked = true;
@@ -31,7 +30,6 @@ public class ItemUnlocker : MonoBehaviour
     void CutOff()
     {
         if (item.isPickedUp != true) return;
-
         unlocked = true;
 
         buttonColor.color = Color.green;
@@ -47,6 +45,7 @@ public class ItemUnlocker : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.F))
             {
+                
                 if (item.gameObject.tag != "Pincers")
                 {
                     Unlock();
