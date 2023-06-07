@@ -19,10 +19,6 @@ public class Gun : MonoBehaviour
 
     public float maxDistance = 100;
 
-    //public UnityEvent onShoot;
-
-
-
     public int maxAmmo = 30;
     public int ammo;
 

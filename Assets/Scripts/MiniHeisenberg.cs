@@ -5,9 +5,9 @@ public class MiniHeisenberg : MonoBehaviour
     public GameObject item;
     public Transform itemParent;
     public bool isPickedUp = false;
-    public float raycastRange = 3f; // Maximum distance for raycast
+    public float raycastRange = 3f;
 
-    private static GameObject currentItem; // Track the currently picked up item
+    private static GameObject currentItem;
 
     public float rotationX;
     public float rotationY;
@@ -41,7 +41,7 @@ public class MiniHeisenberg : MonoBehaviour
         currentItem.GetComponent<Rigidbody>().isKinematic = false;
         currentItem.GetComponent<CapsuleCollider>().enabled = true;
 
-        currentItem = null; // Reset the currently picked up item reference
+        currentItem = null;
     }
 
     void Equip()
@@ -64,7 +64,7 @@ public class MiniHeisenberg : MonoBehaviour
             item.transform.parent = itemParent;
             item.transform.localEulerAngles = new Vector3(rotationX, rotationY, rotationZ);
 
-            currentItem = item; // Set the currently picked up item reference
+            currentItem = item; 
         }
     }
 
@@ -79,7 +79,6 @@ public class MiniHeisenberg : MonoBehaviour
 
             if (otherPickUpController != null && otherPickUpController != this && otherPickUpController.isPickedUp)
             {
-                // If another item is already picked up, return without picking up this item
                 return;
             }
 
